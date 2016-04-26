@@ -28,14 +28,14 @@ namespace Vendaloo
 
         static void PrintProductList()
         {
-            Console.WriteLine("╔═══════════════════════════════════════════════╗");
-            Console.WriteLine($"║ Product\t║\tPrice\t║\tStock\t║");
-            Console.WriteLine("║                                               ║");
+            Console.WriteLine("╔═══════════════════════════════════════════════════════════════╗");
+            Console.WriteLine($"║ #\t║\tProduct\t\t║\tPrice\t║\tStock\t║");
+            Console.WriteLine("║                                                               ║");
             foreach (var product in VendingMachine.ListProducts())
             {
-                Console.WriteLine($"║ {product.Name.PadRight(12, ' ')}\t║\t{product.Price.ToString("C")}\t║\t{product.Stock}\t║");
+                Console.WriteLine($"║ {product.Id}\t║\t{product.Name.PadRight(12, ' ')}\t║\t{product.Price.ToString("C")}\t║\t{product.Stock}\t║");
             }
-            Console.WriteLine("╚═══════════════════════════════════════════════╝");
+            Console.WriteLine("╚═══════════════════════════════════════════════════════════════╝");
         }
     }
 }
