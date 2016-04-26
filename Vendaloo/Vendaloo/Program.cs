@@ -21,15 +21,45 @@ namespace Vendaloo
                 var products = VendingMachine.ListProducts().ToList();
                 PrintProductList(products);
                 var product = GetProductSelection(products);
-                //TODO: get money
-                MakeTransaction(product);
+                var money = GetMoney(product);
+                MakeTransaction(product, money);
                 //TODO: output result of purchase
                 //TODO: output change
                 vend = PrintExitMessage();
             }
         }
 
-        static void MakeTransaction(Product product)
+        static decimal GetMoney(Product product)
+        {
+            var total = 0M;
+            var coins = VendingMachine.ListAllowedCoins().ToList();
+
+            while (total < product.Price)
+            {
+                Console.WriteLine("Please insert coins");
+                var input = Console.ReadLine();
+                decimal value;
+                if (decimal.TryParse(input, out value))
+                {
+                    if (coins.Select(c => c.Value).Contains(value))
+                    {
+                        total += value;
+                    }
+                    else
+                    {
+                        Error($"Only the following coins are allowed: {string.Join(", ", coins.Select(d => d.AsCurrency))}");
+                    }
+                }
+                else
+                {
+                    Error("Sorry. That input is invalid, please try again");
+                }
+            }
+
+            return total;
+        }
+
+        static void MakeTransaction(Product product, decimal money)
         {
             var result = VendingMachine.PurchaseProduct(new Transaction { Product = product });
 
