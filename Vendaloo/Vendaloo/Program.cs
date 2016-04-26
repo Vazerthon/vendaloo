@@ -21,6 +21,7 @@ namespace Vendaloo
                 var products = VendingMachine.ListProducts().ToList();
                 PrintProductList(products);
                 var product = GetProductSelection(products);
+                //TODO: get money
                 MakeTransaction(product);
                 //TODO: output result of purchase
                 //TODO: output change

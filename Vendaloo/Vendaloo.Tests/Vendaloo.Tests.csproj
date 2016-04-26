@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="when_using_a_money_service.cs" />
     <Compile Include="when_using_a_product_service.cs" />
     <Compile Include="when_using_a_vending_machine.cs" />
   </ItemGroup>

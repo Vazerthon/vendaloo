@@ -19,6 +19,7 @@ namespace Vendaloo.AppStart
             kernel.Bind<IVendingMachine>().To <VendingMachine>();
             kernel.Bind<IManageProducts>().To <ManageProducts>();
             kernel.Bind<IProductsStore>().To <ProductsStore>();
+            kernel.Bind<IManageMoney>().To <ManageMoney>();
         }
     }
 }
