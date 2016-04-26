@@ -1,6 +1,6 @@
 ﻿namespace Vendaloo.Contracts
 {
-    interface IVendingMachine
+    public interface IVendingMachine
     {
     }
 }

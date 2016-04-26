@@ -2,7 +2,7 @@
 
 namespace Vendaloo.Services
 {
-    class ManageProducts : IManageProducts
+    public class ManageProducts : IManageProducts
     {
 
     }

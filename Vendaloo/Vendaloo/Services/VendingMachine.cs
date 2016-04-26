@@ -2,7 +2,7 @@
 
 namespace Vendaloo.Services
 {
-    class VendingMachine : IVendingMachine
+    public class VendingMachine : IVendingMachine
     {
     }
 }

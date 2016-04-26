@@ -1,6 +1,6 @@
 ﻿namespace Vendaloo.Contracts
 {
-    interface IManageProducts
+    public interface IManageProducts
     {
     }
 }
