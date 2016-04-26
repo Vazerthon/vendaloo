@@ -6,5 +6,7 @@ namespace Vendaloo.Contracts
     public interface IVendingMachine
     {
         IEnumerable<Product> ListProducts();
+
+        TransactionResult PurchaseProduct(Transaction transaction);
     }
 }

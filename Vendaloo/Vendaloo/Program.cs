@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
@@ -22,14 +21,32 @@ namespace Vendaloo
                 var products = VendingMachine.ListProducts().ToList();
                 PrintProductList(products);
                 var product = GetProductSelection(products);
+                MakeTransaction(product);
+                //TODO: output result of purchase
+                //TODO: output change
                 vend = PrintExitMessage();
             }
         }
 
+        static void MakeTransaction(Product product)
+        {
+            var result = VendingMachine.PurchaseProduct(new Transaction { Product = product });
+
+            if (result.Success)
+            {
+                Console.WriteLine("Thank you for your purchase");
+                Console.WriteLine("\n");
+                return;
+            }
+
+            Error("Sorry. Something went wrong. Please try again");
+            //TODO get an error from the vending machine
+        }
+
         static Product GetProductSelection(IList<Product> products)
         {
-            var selectedProductId = 0;
-            while (selectedProductId <= 0)
+            var selectedProductId = -1;
+            while (selectedProductId < 0)
             {
                 Console.WriteLine("Please select a product...");
                 var input = Console.ReadLine();
@@ -58,7 +75,9 @@ namespace Vendaloo
         static char PrintExitMessage()
         {
             Console.WriteLine("Continue? (y/n)");
-            return Console.ReadKey().KeyChar;
+            var input = Console.ReadKey().KeyChar;
+            Console.WriteLine("\n");
+            return input;
         }
 
         static void PrintProductList(IEnumerable<Product> products)

@@ -53,6 +53,8 @@
     <Compile Include="Contracts\IVendingMachine.cs" />
     <Compile Include="Data\ProductsStore.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ManageProducts.cs" />
