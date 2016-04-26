@@ -39,7 +39,7 @@ namespace Vendaloo.Services
             }
 
             transaction.Product.Stock--;
-            var change = transaction.Product.Price - transaction.Funds;
+            var change = transaction.Funds - transaction.Product.Price;
             return new TransactionResult
             {
                 Success = true,

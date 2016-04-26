@@ -79,7 +79,7 @@ namespace Vendaloo
                 return;
             }
 
-            Console.WriteLine($"Your change is: {coins.Select(d => d.AsCurrency)}");
+            Console.WriteLine($"Your change is: {string.Join(", ", coins.Select(d => d.AsCurrency))}");
         }
 
         static Product GetProductSelection(IList<Product> products)

@@ -164,7 +164,7 @@ namespace Vendaloo.Tests
             var transaction = new Transaction { Product = product, Funds = 10m };
             vendingMachine.PurchaseProduct(transaction);
 
-            A.CallTo(() => moneyService.GetValueAsCoins(product.Price - transaction.Funds)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => moneyService.GetValueAsCoins(transaction.Funds - product.Price)).MustHaveHappened(Repeated.Exactly.Once);
         }
     }
 }
