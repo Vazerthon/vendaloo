@@ -28,6 +28,11 @@ namespace Vendaloo.Services
                 return Error("Sorry. The item you have selected is unknown.");
             }
 
+            if (transaction.Product.Price > transaction.Funds)
+            {
+                return Error("Sorry. You have not inserted enough coins.");
+            }
+
             if (transaction.Product.Stock <= 0)
             {
                 return Error("Sorry. The item you have selected is out of stock.");

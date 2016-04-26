@@ -90,7 +90,7 @@ namespace Vendaloo.Tests
             Assert.That(result.Error, Is.EqualTo("Sorry. The item you have selected is out of stock."));
         }
 
-        [Test, Ignore("functionality not implemented yet")]
+        [Test]
         public void it_should_not_allow_a_product_to_be_purchased_if_too_little_money_is_given()
         {
             var product = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
@@ -104,7 +104,7 @@ namespace Vendaloo.Tests
             var result = vendingMachine.PurchaseProduct(transaction);
 
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Error, Is.EqualTo("Sorry. You have not inserted enough coins"));
+            Assert.That(result.Error, Is.EqualTo("Sorry. You have not inserted enough coins."));
         }
 
         [Test]
