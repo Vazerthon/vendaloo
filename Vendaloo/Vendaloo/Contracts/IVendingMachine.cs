@@ -8,5 +8,7 @@ namespace Vendaloo.Contracts
         IEnumerable<Product> ListProducts();
 
         TransactionResult PurchaseProduct(Transaction transaction);
+
+        IEnumerable<Coin> ListAllowedCoins();
     }
 }

@@ -8,10 +8,12 @@ namespace Vendaloo.Services
     public class VendingMachine : IVendingMachine
     {
         readonly IManageProducts products;
+        readonly IManageMoney money;
 
-        public VendingMachine(IManageProducts products)
+        public VendingMachine(IManageProducts products, IManageMoney money)
         {
             this.products = products;
+            this.money = money;
         }
 
         public IEnumerable<Product> ListProducts()
@@ -36,6 +38,11 @@ namespace Vendaloo.Services
             {
                 Success = true
             };
+        }
+
+        public IEnumerable<Coin> ListAllowedCoins()
+        {
+            return money.GetAllowedCoins();
         }
 
         TransactionResult Error(string message)
