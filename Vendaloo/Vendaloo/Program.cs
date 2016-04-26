@@ -34,7 +34,8 @@ namespace Vendaloo
 
             while (total < product.Price)
             {
-                Console.WriteLine("Please insert coins");
+                var more = total > 0 ? "more " : "";
+                Console.WriteLine($"Please insert {more}coins ({total.ToString("C")})");
                 var input = Console.ReadLine();
                 decimal value;
                 if (decimal.TryParse(input, out value))
