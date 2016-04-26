@@ -16,7 +16,7 @@ namespace Vendaloo.Data
                 new Product {Id = 1, Name = "Tikka", Price = 10.50m, Stock = 0 },
                 new Product {Id = 2, Name = "Bhuna", Price = 10m, Stock = 12 },
                 new Product {Id = 3, Name = "Korma", Price = 6.55m, Stock = 2 },
-                new Product {Id = 4, Name = "Jalfrezi", Price = 12.99m, Stock = 20 },
+                new Product {Id = 4, Name = "Jalfrezi", Price = 12.95m, Stock = 20 },
             };
         }
 
