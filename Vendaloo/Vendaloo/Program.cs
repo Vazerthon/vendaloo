@@ -23,8 +23,6 @@ namespace Vendaloo
                 var product = GetProductSelection(products);
                 var money = GetMoney(product);
                 MakeTransaction(product, money);
-                //TODO: output result of purchase
-                //TODO: output change
                 vend = PrintExitMessage();
             }
         }
@@ -61,17 +59,27 @@ namespace Vendaloo
 
         static void MakeTransaction(Product product, decimal money)
         {
-            var result = VendingMachine.PurchaseProduct(new Transaction { Product = product });
+            var result = VendingMachine.PurchaseProduct(new Transaction { Product = product, Funds = money });
 
             if (result.Success)
             {
                 Console.WriteLine("Thank you for your purchase");
+                PrintChange(result.Change.ToList());
                 Console.WriteLine("\n");
                 return;
             }
 
             Error(result.Error);
-            //TODO get an error from the vending machine
+        }
+
+        static void PrintChange(IList<Coin> coins)
+        {
+            if (!coins.Any())
+            {
+                return;
+            }
+
+            Console.WriteLine($"Your change is: {coins.Select(d => d.AsCurrency)}");
         }
 
         static Product GetProductSelection(IList<Product> products)
