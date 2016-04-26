@@ -125,5 +125,46 @@ namespace Vendaloo.Tests
 
             Assert.That(result, Is.EqualTo(coins));
         }
+
+        [Test]
+        public void it_should_return_change_after_a_successful_transaction()
+        {
+            var coins = new List<Coin>
+            {
+                A.Fake<Coin>(),
+                A.Fake<Coin>(),
+                A.Fake<Coin>()
+            };
+
+            var product = new Product { Id = 2, Name = "fake", Stock = 1, Price = 5 };
+            var products = new List<Product> { product };
+            var productsService = A.Fake<IManageProducts>();
+            var moneyService = A.Fake<IManageMoney>();
+            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            A.CallTo(() => moneyService.GetValueAsCoins(A<decimal>._)).Returns(coins);
+            var vendingMachine = new VendingMachine(productsService, moneyService);
+
+            var transaction = new Transaction { Product = product, Funds = 10m };
+            var result = vendingMachine.PurchaseProduct(transaction);
+
+            Assert.That(result.Success, Is.True);
+            Assert.That(result.Change, Is.EqualTo(coins));
+        }
+
+        [Test]
+        public void it_should_request_change_for_the_correct_value()
+        {
+            var product = new Product { Id = 2, Name = "fake", Stock = 1, Price = 5 };
+            var products = new List<Product> { product };
+            var productsService = A.Fake<IManageProducts>();
+            var moneyService = A.Fake<IManageMoney>();
+            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var vendingMachine = new VendingMachine(productsService, moneyService);
+
+            var transaction = new Transaction { Product = product, Funds = 10m };
+            vendingMachine.PurchaseProduct(transaction);
+
+            A.CallTo(() => moneyService.GetValueAsCoins(product.Price - transaction.Funds)).MustHaveHappened(Repeated.Exactly.Once);
+        }
     }
 }

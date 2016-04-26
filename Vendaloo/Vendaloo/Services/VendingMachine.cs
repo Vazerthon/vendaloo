@@ -39,9 +39,11 @@ namespace Vendaloo.Services
             }
 
             transaction.Product.Stock--;
+            var change = transaction.Product.Price - transaction.Funds;
             return new TransactionResult
             {
-                Success = true
+                Success = true,
+                Change = money.GetValueAsCoins(change)
             };
         }
 
