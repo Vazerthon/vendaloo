@@ -23,24 +23,27 @@ namespace Vendaloo.Services
         {
             if (products.ListAllProducts().SingleOrDefault(p => p.Id.Equals(transaction.Product.Id)) == null)
             {
-                return new TransactionResult
-                {
-                    Success = false
-                };
+                return Error("Sorry. The item you have selected is unknown.");
             }
 
             if (transaction.Product.Stock <= 0)
             {
-                return new TransactionResult
-                {
-                    Success = false
-                };
+                return Error("Sorry. The item you have selected is out of stock.");
             }
 
             transaction.Product.Stock--;
             return new TransactionResult
             {
                 Success = true
+            };
+        }
+
+        TransactionResult Error(string message)
+        {
+            return new TransactionResult
+            {
+                Success = false,
+                Error = message
             };
         }
     }

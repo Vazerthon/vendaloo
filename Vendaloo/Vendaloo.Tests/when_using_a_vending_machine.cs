@@ -66,6 +66,7 @@ namespace Vendaloo.Tests
             var result = vendingMachine.PurchaseProduct(transaction);
 
             Assert.That(result.Success, Is.False);
+            Assert.That(result.Error, Is.EqualTo("Sorry. The item you have selected is unknown."));
         }
 
         [Test]
@@ -81,6 +82,7 @@ namespace Vendaloo.Tests
             var result = vendingMachine.PurchaseProduct(transaction);
 
             Assert.That(result.Success, Is.False);
+            Assert.That(result.Error, Is.EqualTo("Sorry. The item you have selected is out of stock."));
         }
 
         [Test, Ignore("functionality not implemented yet")]
@@ -96,6 +98,7 @@ namespace Vendaloo.Tests
             var result = vendingMachine.PurchaseProduct(transaction);
 
             Assert.That(result.Success, Is.False);
+            Assert.That(result.Error, Is.EqualTo("Sorry. You have not inserted enough coins"));
         }
     }
 }

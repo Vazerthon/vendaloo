@@ -39,7 +39,7 @@ namespace Vendaloo
                 return;
             }
 
-            Error("Sorry. Something went wrong. Please try again");
+            Error(result.Error);
             //TODO get an error from the vending machine
         }
 
