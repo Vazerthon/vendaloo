@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Ninject;
 using Vendaloo.AppStart;
 using Vendaloo.Contracts;
+using Vendaloo.Models;
 
 namespace Vendaloo
 {
@@ -15,9 +19,40 @@ namespace Vendaloo
             var vend = 'y';
             while (vend == 'y')
             {
-                PrintProductList();
+                var products = VendingMachine.ListProducts().ToList();
+                PrintProductList(products);
+                var product = GetProductSelection(products);
                 vend = PrintExitMessage();
             }
+        }
+
+        static Product GetProductSelection(IList<Product> products)
+        {
+            var selectedProductId = 0;
+            while (selectedProductId <= 0)
+            {
+                Console.WriteLine("Please select a product...");
+                var input = Console.ReadLine();
+                int parsed;
+                if (int.TryParse(input, out parsed))
+                {
+                    selectedProductId = parsed;
+                }
+                else
+                {
+                    Error("Sorry. That input is invalid, please try again");
+                    Console.WriteLine("\n");
+                }
+            }
+
+            var product = products.SingleOrDefault(p => p.Id.Equals(selectedProductId));
+            if (product != null)
+            {
+                return product;
+            }
+            Error($"Sorry. No product found with an ID of {selectedProductId}, Please try again");
+            GetProductSelection(products);
+            return null;
         }
 
         static char PrintExitMessage()
@@ -26,16 +61,22 @@ namespace Vendaloo
             return Console.ReadKey().KeyChar;
         }
 
-        static void PrintProductList()
+        static void PrintProductList(IEnumerable<Product> products)
         {
             Console.WriteLine("╔═══════════════════════════════════════════════════════════════╗");
             Console.WriteLine($"║ #\t║\tProduct\t\t║\tPrice\t║\tStock\t║");
             Console.WriteLine("║                                                               ║");
-            foreach (var product in VendingMachine.ListProducts())
+            foreach (var product in products)
             {
                 Console.WriteLine($"║ {product.Id}\t║\t{product.Name.PadRight(12, ' ')}\t║\t{product.Price.ToString("C")}\t║\t{product.Stock}\t║");
             }
             Console.WriteLine("╚═══════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\n");
+        }
+
+        static void Error(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }
