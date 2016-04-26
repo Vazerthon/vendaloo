@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppStart\NinjectConfig.cs" />
     <Compile Include="Contracts\IManageProducts.cs" />
     <Compile Include="Contracts\IProductsStore.cs" />
     <Compile Include="Contracts\IVendingMachine.cs" />
