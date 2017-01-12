@@ -1,0 +1,24 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Microsoft.NETCore.App": "1.1.0",
+    "NSubstitute": "2.0.1-rc",
+    "NUnit": "3.6.0",
+    "Vendaloo": "1.0.0-*",
+    "dotnet-test-nunit": "3.4.0-beta-3"
+  },
+
+  "testRunner": "nunit",
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "runtimes": {
+    "win10-x86": {},
+    "win10-x64": {}
+  }
+}

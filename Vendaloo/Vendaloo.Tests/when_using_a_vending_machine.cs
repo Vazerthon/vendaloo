@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using FakeItEasy;
 using NUnit.Framework;
 using Vendaloo.Contracts;
 using Vendaloo.Models;
 using Vendaloo.Services;
+using NSubstitute;
 
 namespace Vendaloo.Tests
 {
@@ -13,10 +13,11 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_be_able_to_produce_a_list_products()
         {
-            var products = new List<Product> {A.Fake<Product>(), A.Fake<Product>()};
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var products = new List<Product> {Substitute.For<Product>(), Substitute.For<Product>()};
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
+
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var result = vendingMachine.ListProducts();
@@ -29,9 +30,10 @@ namespace Vendaloo.Tests
         {
             var product = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
             var products = new List<Product> {product};
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
+
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction {Product = product, Funds = 10m};
@@ -45,9 +47,9 @@ namespace Vendaloo.Tests
         {
             var product = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
             var products = new List<Product> {product};
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction {Product = product, Funds = 10m};
@@ -60,10 +62,10 @@ namespace Vendaloo.Tests
         public void it_should_not_allow_a_product_to_be_purchased_if_it_is_unknown()
         {
             var unknownProduct = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
-            var products = new List<Product> {A.Fake<Product>()};
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var products = new List<Product> {Substitute.For<Product>()};
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction {Product = unknownProduct, Funds = 10m};
@@ -78,9 +80,9 @@ namespace Vendaloo.Tests
         {
             var product = new Product {Id = 2, Name = "fake", Stock = 0, Price = 5};
             var products = new List<Product> {product};
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction {Product = product, Funds = 10m};
@@ -95,9 +97,9 @@ namespace Vendaloo.Tests
         {
             var product = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
             var products = new List<Product> {product};
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction {Product = product, Funds = 1m};
@@ -112,13 +114,13 @@ namespace Vendaloo.Tests
         {
             var coins = new List<Coin>
             {
-                A.Fake<Coin>(),
-                A.Fake<Coin>(),
-                A.Fake<Coin>()
+                Substitute.For<Coin>(),
+                Substitute.For<Coin>(),
+                Substitute.For<Coin>()
             };
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => moneyService.GetAllowedCoins()).Returns(coins);
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            moneyService.GetAllowedCoins().Returns(coins);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var result = vendingMachine.ListAllowedCoins();
@@ -131,17 +133,17 @@ namespace Vendaloo.Tests
         {
             var coins = new List<Coin>
             {
-                A.Fake<Coin>(),
-                A.Fake<Coin>(),
-                A.Fake<Coin>()
+                Substitute.For<Coin>(),
+                Substitute.For<Coin>(),
+                Substitute.For<Coin>()
             };
 
             var product = new Product { Id = 2, Name = "fake", Stock = 1, Price = 5 };
             var products = new List<Product> { product };
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
-            A.CallTo(() => moneyService.GetValueAsCoins(A<decimal>._)).Returns(coins);
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
+            moneyService.GetValueAsCoins(Arg.Any<decimal>()).Returns(coins);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction { Product = product, Funds = 10m };
@@ -156,15 +158,15 @@ namespace Vendaloo.Tests
         {
             var product = new Product { Id = 2, Name = "fake", Stock = 1, Price = 5 };
             var products = new List<Product> { product };
-            var productsService = A.Fake<IManageProducts>();
-            var moneyService = A.Fake<IManageMoney>();
-            A.CallTo(() => productsService.ListAllProducts()).Returns(products);
+            var productsService = Substitute.For<IManageProducts>();
+            var moneyService = Substitute.For<IManageMoney>();
+            productsService.ListAllProducts().Returns(products);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction { Product = product, Funds = 10m };
             vendingMachine.PurchaseProduct(transaction);
 
-            A.CallTo(() => moneyService.GetValueAsCoins(transaction.Funds - product.Price)).MustHaveHappened(Repeated.Exactly.Once);
+            moneyService.GetValueAsCoins(transaction.Funds - product.Price).Received(1);
         }
     }
 }
