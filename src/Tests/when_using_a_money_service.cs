@@ -19,11 +19,11 @@ namespace Vendaloo.Tests
             Assert.That(result.Sum(c => c.Value), Is.EqualTo(input));
             var expected = new List<Coin>
             {
-                new Coin {Value = 2.00M},
-                new Coin {Value = 1.00M},
-                new Coin {Value = 0.50M},
-                new Coin {Value = 0.20M},
-                new Coin {Value = 0.05M}
+                new Coin(2.00M),
+                new Coin(1.00M),
+                new Coin(0.50M),
+                new Coin(0.20M),
+                new Coin(0.05M)
             };
 
             foreach (var coin in expected)

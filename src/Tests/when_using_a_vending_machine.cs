@@ -114,9 +114,9 @@ namespace Vendaloo.Tests
         {
             var coins = new List<Coin>
             {
-                Substitute.For<Coin>(),
-                Substitute.For<Coin>(),
-                Substitute.For<Coin>()
+                new Coin(0.01m),
+                new Coin(0.02m),
+                new Coin(0.05m),
             };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
@@ -133,9 +133,9 @@ namespace Vendaloo.Tests
         {
             var coins = new List<Coin>
             {
-                Substitute.For<Coin>(),
-                Substitute.For<Coin>(),
-                Substitute.For<Coin>()
+                new Coin(0.01m),
+                new Coin(0.02m),
+                new Coin(0.05m),
             };
 
             var product = new Product { Id = 2, Name = "fake", Stock = 1, Price = 5 };
