@@ -3,26 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vendaloo.Contracts;
-using Vendaloo.Data;
 using Vendaloo.Models;
-using Vendaloo.Services;
 
 namespace Vendaloo
 {
     class Program
     {
-        static IServiceProvider serviceProvider = Configure();
+        static IServiceProvider serviceProvider = Startup.GetProvider();
         static readonly IVendingMachine VendingMachine = serviceProvider.GetService<IVendingMachine>();
-
-        static IServiceProvider Configure()
-        { 
-            return new ServiceCollection()
-            .AddTransient<IVendingMachine, VendingMachine>()
-            .AddTransient<IManageProducts, ManageProducts>()
-            .AddTransient<IProductsStore, ProductsStore>()
-            .AddTransient<IManageMoney, ManageMoney>()
-            .BuildServiceProvider();
-        }
 
         static void Main()
         {
