@@ -11,9 +11,9 @@ namespace Vendaloo.Tests
     public class when_using_a_vending_machine
     {
         [Test]
-        public void it_should_be_able_to_produce_a_list_products()
+        public void it_should_be_able_to_produce_a_list_of_products()
         {
-            var products = new List<Product> {Substitute.For<Product>(), Substitute.For<Product>()};
+            var products = new List<Product> {  new Product(0, "", 0, 0),  new Product(0, "", 0, 0) };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
             productsService.ListAllProducts().Returns(products);
@@ -28,7 +28,7 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_allow_a_product_to_be_purchased()
         {
-            var product = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
+            var product = new Product(2, "fake", 1, 5);
             var products = new List<Product> {product};
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
@@ -45,7 +45,7 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_reduce_the_stock_count_after_a_transaction()
         {
-            var product = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
+            var product = new Product(2, "fake", 1, 1);
             var products = new List<Product> {product};
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
@@ -61,8 +61,8 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_not_allow_a_product_to_be_purchased_if_it_is_unknown()
         {
-            var unknownProduct = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
-            var products = new List<Product> {Substitute.For<Product>()};
+            var unknownProduct = new Product(2, "fake", 1, 5);
+            var products = new List<Product> {  new Product(0, "", 0, 0) };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
             productsService.ListAllProducts().Returns(products);
@@ -78,8 +78,8 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_not_allow_a_product_to_be_purchased_if_it_is_out_of_stock()
         {
-            var product = new Product {Id = 2, Name = "fake", Stock = 0, Price = 5};
-            var products = new List<Product> {product};
+            var product = new Product(2, "fake", 1, 0);
+            var products = new List<Product> { product };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
             productsService.ListAllProducts().Returns(products);
@@ -95,8 +95,8 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_not_allow_a_product_to_be_purchased_if_too_little_money_is_given()
         {
-            var product = new Product {Id = 2, Name = "fake", Stock = 1, Price = 5};
-            var products = new List<Product> {product};
+            var product = new Product(2, "fake", 2, 5);
+            var products = new List<Product> { product };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
             productsService.ListAllProducts().Returns(products);
@@ -138,7 +138,7 @@ namespace Vendaloo.Tests
                 new Coin(0.05m),
             };
 
-            var product = new Product { Id = 2, Name = "fake", Stock = 1, Price = 5 };
+            var product = new Product(2, "fake", 1, 5);
             var products = new List<Product> { product };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
@@ -156,7 +156,7 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_request_change_for_the_correct_value()
         {
-            var product = new Product { Id = 2, Name = "fake", Stock = 1, Price = 5 };
+            var product = new Product(2, "fake", 1, 5);
             var products = new List<Product> { product };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();

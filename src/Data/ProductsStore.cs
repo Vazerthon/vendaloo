@@ -12,11 +12,11 @@ namespace Vendaloo.Data
         {
             products = new List<Product>
             {
-                new Product {Id = 0, Name = "Vindaloo", Price = 9.95m, Stock = 5 },
-                new Product {Id = 1, Name = "Tikka", Price = 10.50m, Stock = 0 },
-                new Product {Id = 2, Name = "Bhuna", Price = 10m, Stock = 12 },
-                new Product {Id = 3, Name = "Korma", Price = 6.55m, Stock = 2 },
-                new Product {Id = 4, Name = "Jalfrezi", Price = 12.95m, Stock = 20 },
+                new Product(0, "Vindaloo", 9.95m, 5),
+                new Product(1, "Tikka", 10.50m, 0),
+                new Product(2, "Bhuna", 10m, 12),
+                new Product(3, "Korma", 6.55m, 2),
+                new Product(4, "Jalfrezi", 12.95m, 20),
             };
         }
 

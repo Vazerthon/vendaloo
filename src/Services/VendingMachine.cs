@@ -38,7 +38,7 @@ namespace Vendaloo.Services
                 return Error("Sorry. The item you have selected is out of stock.");
             }
 
-            transaction.Product.Stock--;
+            transaction.Product.ReduceStockBy(1);
             var change = transaction.Funds - transaction.Product.Price;
             return new TransactionResult
             {
