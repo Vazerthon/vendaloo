@@ -62,7 +62,7 @@ namespace Vendaloo.Tests
         }
 
         [Test]
-        public void it_should_throw_an_exception_if_the_price_is_less_than_zero()
+        public void it_should_throw_an_exception_if_the_price_is_less_than_or_equal_to_zero()
         {
             // Arrange
 
