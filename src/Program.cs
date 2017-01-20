@@ -14,6 +14,8 @@ namespace Vendaloo
 
         static void Main()
         {
+            Console.OutputEncoding = System.Text.UnicodeEncoding.UTF8;
+
             var vend = "y";
             while (vend == "y")
             {
