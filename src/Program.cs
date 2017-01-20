@@ -14,8 +14,8 @@ namespace Vendaloo
 
         static void Main()
         {
-            var vend = 'y';
-            while (vend == 'y')
+            var vend = "y";
+            while (vend == "y")
             {
                 var products = VendingMachine.ListProducts().ToList();
                 PrintProductList(products);
@@ -54,6 +54,7 @@ namespace Vendaloo
                 }
             }
 
+            Console.Write("\b \b");
             return total;
         }
 
@@ -111,10 +112,10 @@ namespace Vendaloo
             return null;
         }
 
-        static char PrintExitMessage()
+        static string PrintExitMessage()
         {
             Console.WriteLine("Continue? (y/n)");
-            var input = Console.ReadKey().KeyChar;
+            var input = Console.ReadLine();
             Console.WriteLine("\n");
             return input;
         }

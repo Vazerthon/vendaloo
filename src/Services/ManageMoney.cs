@@ -9,7 +9,7 @@ namespace Vendaloo.Services
     {
         public IEnumerable<IMoney> GetAllowedDenominations()
         {
-            return new List<Coin>
+            return new List<IMoney>
             {
                 new Coin(2.00M),
                 new Coin(1.00M),

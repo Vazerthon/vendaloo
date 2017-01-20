@@ -31,5 +31,7 @@ namespace Vendaloo.Tests
                 Assert.That(result.Any(c => c.Value.Equals(coin.Value)), Is.True);
             }
         }
+
+        // TODO: tests when handling notes
     }
 }
