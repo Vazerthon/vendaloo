@@ -19,7 +19,7 @@ namespace Vendaloo.Tests
         {
             var value = 1m;
             var coin = new Coin(value);
-            Assert.AreEqual("£1.00", coin.AsCurrency);
+            Assert.AreEqual("£1.00", coin.ValueAsCurrency);
         }       
     }
 }

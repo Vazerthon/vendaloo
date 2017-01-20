@@ -8,6 +8,6 @@ namespace Vendaloo.Models
 
         public string Error { get; set; }
 
-        public IEnumerable<Coin> Change { get; set; }
+        public IEnumerable<IMoney> Change { get; set; }
     }
 }

@@ -29,23 +29,23 @@ namespace Vendaloo
         static decimal GetMoney(Product product)
         {
             var total = 0M;
-            var coins = VendingMachine.ListAllowedCoins().ToList();
+            var denominations = VendingMachine.ListAllowedDenominations().ToList();
 
             while (total < product.Price)
             {
                 var more = total > 0 ? "more " : "";
-                Console.WriteLine($"Please insert {more}coins ({total.ToString("C")})");
+                Console.WriteLine($"Please insert {more}cash ({total.ToString("C")})");
                 var input = Console.ReadLine();
                 decimal value;
                 if (decimal.TryParse(input, out value))
                 {
-                    if (coins.Select(c => c.Value).Contains(value))
+                    if (denominations.Select(c => c.Value).Contains(value))
                     {
                         total += value;
                     }
                     else
                     {
-                        Error($"Only the following coins are allowed: {string.Join(", ", coins.Select(d => d.AsCurrency))}");
+                        Error($"Only the following cash values are allowed: {string.Join(", ", denominations.Select(d => d.ValueAsCurrency))}");
                     }
                 }
                 else
@@ -72,14 +72,14 @@ namespace Vendaloo
             Error(result.Error);
         }
 
-        static void PrintChange(IList<Coin> coins)
+        static void PrintChange(IList<IMoney> money)
         {
-            if (!coins.Any())
+            if (!money.Any())
             {
                 return;
             }
 
-            Console.WriteLine($"Your change is: {string.Join(", ", coins.Select(d => d.AsCurrency))}");
+            Console.WriteLine($"Your change is: {string.Join(", ", money.Select(d => d.ValueAsCurrency))}");
         }
 
         static Product GetProductSelection(IList<Product> products)

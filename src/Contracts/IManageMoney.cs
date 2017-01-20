@@ -5,8 +5,8 @@ namespace Vendaloo.Contracts
 {
     public interface IManageMoney
     {
-        IEnumerable<Coin> GetAllowedCoins();
+        IEnumerable<IMoney> GetAllowedDenominations();
 
-        IEnumerable<Coin> GetValueAsCoins(decimal value);
+        IEnumerable<IMoney> GetValueAsMoney(decimal value);
     }
 }

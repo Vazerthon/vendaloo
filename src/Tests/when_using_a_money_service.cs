@@ -14,10 +14,10 @@ namespace Vendaloo.Tests
         {
             const decimal input = 3.75m;
             var moneyManager = new ManageMoney();
-            var result = moneyManager.GetValueAsCoins(input).ToList();
+            var result = moneyManager.GetValueAsMoney(input).ToList();
 
             Assert.That(result.Sum(c => c.Value), Is.EqualTo(input));
-            var expected = new List<Coin>
+            var expected = new List<IMoney>
             {
                 new Coin(2.00M),
                 new Coin(1.00M),

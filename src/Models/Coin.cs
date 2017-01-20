@@ -1,10 +1,10 @@
 ﻿namespace Vendaloo.Models
 {
-    public class Coin
+    public class Coin : IMoney
     {
         public decimal Value { get; private set; }
 
-        public string AsCurrency => Value.ToString("C");
+        public string ValueAsCurrency => Value.ToString("C");
 
         public Coin(decimal value)
         {

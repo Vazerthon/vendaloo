@@ -43,13 +43,13 @@ namespace Vendaloo.Services
             return new TransactionResult
             {
                 Success = true,
-                Change = money.GetValueAsCoins(change)
+                Change = money.GetValueAsMoney(change)
             };
         }
 
-        public IEnumerable<Coin> ListAllowedCoins()
+        public IEnumerable<IMoney> ListAllowedDenominations()
         {
-            return money.GetAllowedCoins();
+            return money.GetAllowedDenominations();
         }
 
         TransactionResult Error(string message)

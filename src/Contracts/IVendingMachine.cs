@@ -9,6 +9,6 @@ namespace Vendaloo.Contracts
 
         TransactionResult PurchaseProduct(Transaction transaction);
 
-        IEnumerable<Coin> ListAllowedCoins();
+        IEnumerable<IMoney> ListAllowedDenominations();
     }
 }

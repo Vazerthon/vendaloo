@@ -13,7 +13,7 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_be_able_to_produce_a_list_of_products()
         {
-            var products = new List<Product> {  new Product(0, "", 0, 0),  new Product(0, "", 0, 0) };
+            var products = new List<Product> {  new Product(0, "x", 1, 1), new Product(0, "y", 2, 2) };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
             productsService.ListAllProducts().Returns(products);
@@ -62,7 +62,7 @@ namespace Vendaloo.Tests
         public void it_should_not_allow_a_product_to_be_purchased_if_it_is_unknown()
         {
             var unknownProduct = new Product(2, "fake", 1, 5);
-            var products = new List<Product> {  new Product(0, "", 0, 0) };
+            var products = new List<Product> {  new Product(0, "x", 1, 1) };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
             productsService.ListAllProducts().Returns(products);
@@ -112,7 +112,7 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_return_a_list_of_allowed_coins()
         {
-            var coins = new List<Coin>
+            var coins = new List<IMoney>
             {
                 new Coin(0.01m),
                 new Coin(0.02m),
@@ -120,10 +120,10 @@ namespace Vendaloo.Tests
             };
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
-            moneyService.GetAllowedCoins().Returns(coins);
+            moneyService.GetAllowedDenominations().Returns(coins);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
-            var result = vendingMachine.ListAllowedCoins();
+            var result = vendingMachine.ListAllowedDenominations();
 
             Assert.That(result, Is.EqualTo(coins));
         }
@@ -131,7 +131,7 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_return_change_after_a_successful_transaction()
         {
-            var coins = new List<Coin>
+            var coins = new List<IMoney>
             {
                 new Coin(0.01m),
                 new Coin(0.02m),
@@ -143,7 +143,7 @@ namespace Vendaloo.Tests
             var productsService = Substitute.For<IManageProducts>();
             var moneyService = Substitute.For<IManageMoney>();
             productsService.ListAllProducts().Returns(products);
-            moneyService.GetValueAsCoins(Arg.Any<decimal>()).Returns(coins);
+            moneyService.GetValueAsMoney(Arg.Any<decimal>()).Returns(coins);
             var vendingMachine = new VendingMachine(productsService, moneyService);
 
             var transaction = new Transaction { Product = product, Funds = 10m };
@@ -166,7 +166,7 @@ namespace Vendaloo.Tests
             var transaction = new Transaction { Product = product, Funds = 10m };
             vendingMachine.PurchaseProduct(transaction);
 
-            moneyService.GetValueAsCoins(transaction.Funds - product.Price).Received(1);
+            moneyService.GetValueAsMoney(transaction.Funds - product.Price).Received(1);
         }
     }
 }

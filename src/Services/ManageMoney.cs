@@ -7,7 +7,7 @@ namespace Vendaloo.Services
 {
     public class ManageMoney : IManageMoney
     {
-        public IEnumerable<Coin> GetAllowedCoins()
+        public IEnumerable<IMoney> GetAllowedDenominations()
         {
             return new List<Coin>
             {
@@ -20,10 +20,10 @@ namespace Vendaloo.Services
             };
         }
 
-        public IEnumerable<Coin> GetValueAsCoins(decimal value)
+        public IEnumerable<IMoney> GetValueAsMoney(decimal value)
         {
-            var coins = GetAllowedCoins().ToArray();
-            var split = new List<Coin>();
+            var coins = GetAllowedDenominations().ToArray();
+            var split = new List<IMoney>();
             foreach (var coin in coins)
             {
                 if (value < coin.Value)

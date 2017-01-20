@@ -13,7 +13,7 @@ namespace Vendaloo.Tests
         [Test]
         public void it_should_list_products()
         {
-            var products = new List<Product> { new Product(0, "", 0, 0),  new Product(0, "", 0, 0) };
+            var products = new List<Product> { new Product(0, "x", 1, 1),  new Product(0, "y", 2, 2) };
             var productStore = Substitute.For<IProductsStore>();
             productStore.ListProducts().Returns(products);
 
